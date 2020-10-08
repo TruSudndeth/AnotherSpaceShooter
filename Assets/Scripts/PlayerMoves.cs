@@ -124,7 +124,7 @@ public class PlayerMoves : MonoBehaviour
     }
     public void Shields(bool _shilds)
     {
-        shieldCount++;
+        shieldCount = 3;
         ShieldCount(shieldCount);
         shieldsEnabled.SetActive(true);
         shields = _shilds;
