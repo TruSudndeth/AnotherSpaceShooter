@@ -88,6 +88,12 @@ public class GameController : MonoBehaviour
                     playerOutOfAmo(false);
                 }
                 break;
+            case 6:
+                if(ApplyHitBy.GetComponent<PlayerMoves>() != null)
+                {
+                    ApplyHitBy.GetComponent<PlayerMoves>().FirstAidKit();
+                }
+                break;
             }
         if (!Shilds)
         {

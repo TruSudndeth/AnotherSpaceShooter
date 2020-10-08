@@ -14,6 +14,7 @@ public class PlayerMoves : MonoBehaviour
     public static event NumberOfLives ShieldCount;
     public static event PlayerState playerOutOfAmo;
 
+
     [SerializeField]
     private int Lives = 3;
     [SerializeField]
@@ -123,7 +124,6 @@ public class PlayerMoves : MonoBehaviour
             Lives--;
             PlayerDamaged();
             LivesLeft(Lives);
-            Debug.Log("this ran lives --");
         }
         if(Lives <= 0)
         {
@@ -183,5 +183,13 @@ public class PlayerMoves : MonoBehaviour
         amoCount += _NewAmoCount;
         GameObject _PlusPoints = Instantiate(PlusPoints, transform.position, Quaternion.identity);
         _PlusPoints.GetComponent<PlusPoints>().Points = _NewAmoCount;
+    }
+
+    public void FirstAidKit()
+    {
+        Lives++;
+        if (Lives > 3) Lives = 3;
+        LivesLeft(Lives);
+        PlayerDamaged();
     }
 }
