@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     public static event UpdateCanvis AllScores;
     public delegate void GameOver();
     public static event GameOver PlayerDied;
+    public delegate void Player();
+    public static event Player playerOutOfAmo;
 
     [SerializeField]
     private int playerCoins = 0;
@@ -28,6 +30,7 @@ public class GameController : MonoBehaviour
         PowerUp.Collected += EnablePowerUp;
         EnemyMoves.KillingEnemy += UpdateScores;
         Astroid.Points += UpdateScores;
+        PlayerMoves.playerOutOfAmo += PlayerOutOfAmo;
         UpdateScores(playerScore);
     }
 
@@ -125,5 +128,9 @@ public class GameController : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+    private void PlayerOutOfAmo()
+    {
+        playerOutOfAmo();
     }
 }

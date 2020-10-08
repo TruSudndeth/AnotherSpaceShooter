@@ -27,6 +27,8 @@ public class ScoresNPoints : MonoBehaviour
     private Sprite[] Lives;
     [SerializeField]
     private GameObject[] Shields;
+    [SerializeField]
+    private TextMeshProUGUI _NoAmo;
     private int ShieldCount = 0;
     private bool isGameOver = false;
     private IEnumerator gameOverCo;
@@ -38,6 +40,7 @@ public class ScoresNPoints : MonoBehaviour
         PlayerMoves.ShieldCount += UpdateShields;
         PlayerMoves.LivesLeft += UpdateLives;
         GameController.AllScores += RefreshScores;
+        GameController.playerOutOfAmo += OutOfAmo;
         NumOfLives.sprite = Lives[3];
         UpdateShields(0);
     }
@@ -114,6 +117,26 @@ public class ScoresNPoints : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.5f);
             toggle = !toggle;
         }
+    }
+
+    private void OutOfAmo()
+    {
+        Debug.Log("NoAmo");
+        _NoAmo.gameObject.SetActive(true);
+        IEnumerator OutOfAmo = FlashOutOfAmo();
+        StartCoroutine(OutOfAmo);
+    }
+    private IEnumerator FlashOutOfAmo()
+    {
+        bool enable = true;
+        for(int i = 0; i <= 10; i ++)
+        {
+            _NoAmo.enabled = enable;
+            yield return new WaitForSecondsRealtime(0.1f);
+            enable = !enable;
+        }
+        _NoAmo.enabled = true;
+        StopCoroutine(FlashOutOfAmo());
     }
 
     private void OnDestroy()

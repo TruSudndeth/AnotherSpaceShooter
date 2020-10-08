@@ -12,6 +12,7 @@ public class PlayerMoves : MonoBehaviour
     public delegate void NumberOfLives(int LivesLeft);
     public static event NumberOfLives LivesLeft;
     public static event NumberOfLives ShieldCount;
+    public static event PlayerState playerOutOfAmo;
 
     [SerializeField]
     private int Lives = 3;
@@ -41,6 +42,7 @@ public class PlayerMoves : MonoBehaviour
     private bool invulnerable = false;
     private IEnumerator InvulnerableCoroutine;
     private Animator playerAnim;
+    private int amoCount = 15;
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -64,11 +66,17 @@ public class PlayerMoves : MonoBehaviour
             CheckBounds();
             ApplyInputs();
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && amoCount >= 0)
         {
             GetComponentInChildren<BoldsFire>().Fire();
             _audioSource.clip = _audioClip;
             _audioSource.Play();
+            amoCount--;
+            if(amoCount == 0)
+            {
+                // let game controller know im out of amo and spawn some
+                playerOutOfAmo?.Invoke();
+            }
         }
         if (Input.GetKey(KeyCode.LeftShift)) shiftSpeed = 1.75f;
         else shiftSpeed = 1;
