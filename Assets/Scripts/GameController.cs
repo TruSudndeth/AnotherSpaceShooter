@@ -11,8 +11,10 @@ public class GameController : MonoBehaviour
     public static event UpdateCanvis AllScores;
     public delegate void GameOver();
     public static event GameOver PlayerDied;
-    public delegate void Player();
+    public delegate void Player(bool NoAmo);
     public static event Player playerOutOfAmo;
+    public delegate void AmoCollected(int PlusAmo);
+    public static event AmoCollected PlusAmoCount;
 
     [SerializeField]
     private int playerCoins = 0;
@@ -78,6 +80,14 @@ public class GameController : MonoBehaviour
                 playerCoins++;
                 UpdateScores(0);
                 break;
+            case 5:
+                if(ApplyHitBy.GetComponentInChildren<PlayerMoves>() != null)
+                {
+                    int RangeAmo = Random.Range(15, 30);
+                    PlusAmoCount?.Invoke(RangeAmo);
+                    playerOutOfAmo(false);
+                }
+                break;
             }
         if (!Shilds)
         {
@@ -131,6 +141,6 @@ public class GameController : MonoBehaviour
     }
     private void PlayerOutOfAmo()
     {
-        playerOutOfAmo();
+        playerOutOfAmo(true);
     }
 }

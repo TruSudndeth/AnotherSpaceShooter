@@ -119,12 +119,16 @@ public class ScoresNPoints : MonoBehaviour
         }
     }
 
-    private void OutOfAmo()
+    private void OutOfAmo(bool _IO)
     {
         Debug.Log("NoAmo");
-        _NoAmo.gameObject.SetActive(true);
-        IEnumerator OutOfAmo = FlashOutOfAmo();
-        StartCoroutine(OutOfAmo);
+        if (_IO)
+        {
+            _NoAmo.gameObject.SetActive(true);
+            IEnumerator OutOfAmo = FlashOutOfAmo();
+            StartCoroutine(OutOfAmo);
+        }
+        else _NoAmo.gameObject.SetActive(false);
     }
     private IEnumerator FlashOutOfAmo()
     {
@@ -145,5 +149,6 @@ public class ScoresNPoints : MonoBehaviour
         PlayerMoves.ShieldCount -= UpdateShields;
         PlayerMoves.LivesLeft -= UpdateLives;
         GameController.AllScores -= RefreshScores;
+        GameController.playerOutOfAmo -= OutOfAmo;
     }
 }

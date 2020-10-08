@@ -30,6 +30,8 @@ public class PlayerMoves : MonoBehaviour
     private AudioClip _audioClip;
     [SerializeField]
     private AudioClip _playerdied;
+    [SerializeField]
+    private GameObject PlusPoints;
 
     private int shieldCount = 0;
     private Vector3 bounds;
@@ -45,6 +47,7 @@ public class PlayerMoves : MonoBehaviour
     private int amoCount = 15;
     void Start()
     {
+        GameController.PlusAmoCount += AmoCollected;
         _audioSource = GetComponent<AudioSource>();
         playerAnim = GetComponent<Animator>();
         if (playerAnim == null) Debug.Log("this is emplty");
@@ -127,6 +130,7 @@ public class PlayerMoves : MonoBehaviour
             playerState?.Invoke();
             _audioSource.clip = _playerdied;
             _audioSource.Play();
+            GameController.PlusAmoCount -= AmoCollected;
             Destroy(gameObject);
         }
     }
@@ -173,5 +177,11 @@ public class PlayerMoves : MonoBehaviour
                 break;
         }
 
+    }
+    public void AmoCollected(int _NewAmoCount)
+    {
+        amoCount += _NewAmoCount;
+        GameObject _PlusPoints = Instantiate(PlusPoints, transform.position, Quaternion.identity);
+        _PlusPoints.GetComponent<PlusPoints>().Points = _NewAmoCount;
     }
 }
