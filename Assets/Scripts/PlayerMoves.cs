@@ -36,6 +36,7 @@ public class PlayerMoves : MonoBehaviour
     private float inputY;
     private Vector3 applyInput;
     private float speedMulti = 1;
+    private float shiftSpeed = 1f;
     private bool shields = false;
     private bool invulnerable = false;
     private IEnumerator InvulnerableCoroutine;
@@ -69,13 +70,15 @@ public class PlayerMoves : MonoBehaviour
             _audioSource.clip = _audioClip;
             _audioSource.Play();
         }
+        if (Input.GetKey(KeyCode.LeftShift)) shiftSpeed = 1.75f;
+        else shiftSpeed = 1;
     }
 
     private void BasicMovementInput()
     {
 
-        inputX += Input.GetAxis("Horizontal") * speedMulti * speed * Time.deltaTime;
-        inputY += Input.GetAxis("Vertical") * speedMulti * speed * Time.deltaTime;
+        inputX += Input.GetAxis("Horizontal") * speedMulti * speed * Time.deltaTime * shiftSpeed;
+        inputY += Input.GetAxis("Vertical") * speedMulti * speed * Time.deltaTime * shiftSpeed;
     }
     private void CheckBounds()
     {
