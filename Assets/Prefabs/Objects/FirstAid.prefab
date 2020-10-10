@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 947689708987349721}
   - component: {fileID: 6893376975592644783}
   - component: {fileID: 781434907367471455}
+  - component: {fileID: 521345140}
   m_Layer: 0
   m_Name: FirstAid
   m_TagString: Untagged
@@ -93,8 +94,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0f6a15012985c448374f8458cd368f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PowerUpType: 1
   PowerUpID: 6
+--- !u!114 &521345140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986138238266150945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6175b5a1ef071b241863f48bd25a7dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationMultiplyer: 1
 --- !u!1001 &4123868339539760601
 PrefabInstance:
   m_ObjectHideFlags: 0

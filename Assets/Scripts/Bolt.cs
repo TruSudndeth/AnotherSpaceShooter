@@ -12,6 +12,8 @@ public class Bolt : MonoBehaviour
     private Sprite PlayerBolt;
     [SerializeField]
     private Sprite EnemyBolt;
+    [SerializeField]
+    private Sprite PowerLaserBolt;
     private void Awake()
     {
         transform.tag = transform.parent.tag;
@@ -28,26 +30,41 @@ public class Bolt : MonoBehaviour
         {
             GetComponentInChildren<SpriteRenderer>().sprite = EnemyBolt;
         }
+        if(transform.tag == "PowerLaser")
+        {
+            GetComponent<SpriteRenderer>().sprite = PowerLaserBolt;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if(other.transform.tag == "Bounds")
         {
-            Destroy(gameObject);
+            // check parents children count if zero destroy it else destroy this
+            DestroyBoltsParent();
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(transform.tag == "PlayerBolts" && other.tag == "Enemy")
+        if((transform.tag == "PlayerBolts" || transform.tag == "PowerLaser") && other.tag == "Enemy")
         {
             other.GetComponentInParent<EnemyMoves>().EnemyHit(gameObject);
-            Destroy(gameObject);
+            DestroyBoltsParent();
         }
         if(transform.tag == "EnemyBolts" && other.tag == "Player")
         {
             other.GetComponentInParent<PlayerMoves>().PlayerHit();
-            Destroy(gameObject);
+            DestroyBoltsParent();
         }
+        if (transform.tag == "Obstacle")
+        {
+            DestroyBoltsParent();
+        }
+    }
+
+    private void DestroyBoltsParent()
+    {
+        if (transform.parent.childCount <= 1) Destroy(transform.parent.gameObject);
+        else Destroy(gameObject);
     }
 }

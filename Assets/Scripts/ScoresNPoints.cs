@@ -121,7 +121,6 @@ public class ScoresNPoints : MonoBehaviour
 
     private void OutOfAmo(bool _IO)
     {
-        Debug.Log("NoAmo");
         if (_IO)
         {
             _NoAmo.gameObject.SetActive(true);

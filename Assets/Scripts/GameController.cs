@@ -52,9 +52,9 @@ public class GameController : MonoBehaviour
             switch (PowerUpID)
             {
                 case 1:
-                if (ApplyHitBy.GetComponent<BoldsFire>() != null) 
+                if (ApplyHitBy.GetComponentInChildren<BoldsFire>() != null) 
                 {
-                    ApplyHitBy.GetComponentInChildren<BoldsFire>().MultiShot(Random.Range(2, 4));
+                    ApplyHitBy.GetComponentInChildren<BoldsFire>().MultiShot(3);
                     BenefitTime = 30;
                     MultiShot = true;
                 }
@@ -92,6 +92,12 @@ public class GameController : MonoBehaviour
                 if(ApplyHitBy.GetComponent<PlayerMoves>() != null)
                 {
                     ApplyHitBy.GetComponent<PlayerMoves>().FirstAidKit();
+                }
+                break;
+            case 7:
+                if(ApplyHitBy.GetComponent<PlayerMoves>() != null)
+                {
+                    ApplyHitBy.GetComponent<PlayerMoves>().EnablePowerLaser();
                 }
                 break;
             }

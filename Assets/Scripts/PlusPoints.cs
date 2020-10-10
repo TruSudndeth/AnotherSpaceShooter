@@ -13,7 +13,6 @@ public class PlusPoints : MonoBehaviour
     {
         Offset = new Vector3(0, transform.position.y, 0);
         GetComponentInChildren<TextMeshProUGUI>().text = "+ " + points;
-        Debug.Log("points" + points);
         //Debug.Break();
         Destroy(gameObject, 1);
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoves : MonoBehaviour
 {
     //Todo's
+    // player needs to explode on last life with laser hit
     // Player cool down fire's
     // play sound for shields down and hit
     public delegate void PlayerState();
@@ -21,6 +22,10 @@ public class PlayerMoves : MonoBehaviour
     private float speed = 1;
     [SerializeField]
     private GameObject shieldsEnabled;
+    [SerializeField]
+    private GameObject PowerLaser;
+    [SerializeField]
+    private GameObject PowerLaserFX;
     [SerializeField]
     private GameObject LeftDam;
     [SerializeField]
@@ -44,6 +49,7 @@ public class PlayerMoves : MonoBehaviour
     private bool shields = false;
     private bool invulnerable = false;
     private IEnumerator InvulnerableCoroutine;
+    private IEnumerator powerLaserCoolDown;
     private Animator playerAnim;
     private int amoCount = 15;
     void Start()
@@ -184,6 +190,14 @@ public class PlayerMoves : MonoBehaviour
         GameObject _PlusPoints = Instantiate(PlusPoints, transform.position, Quaternion.identity);
         _PlusPoints.GetComponent<PlusPoints>().Points = _NewAmoCount;
     }
+    private IEnumerator PowerLaserCoolDown()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        PowerLaser.SetActive(false);
+        PowerLaserFX.SetActive(false);
+        GetComponentInChildren<BoldsFire>().gameObject.tag = "PlayerBolts";
+        StopCoroutine(powerLaserCoolDown);
+    }
 
     public void FirstAidKit()
     {
@@ -191,5 +205,13 @@ public class PlayerMoves : MonoBehaviour
         if (Lives > 3) Lives = 3;
         LivesLeft(Lives);
         PlayerDamaged();
+    }
+    public void EnablePowerLaser()
+    {
+        GetComponentInChildren<BoldsFire>().gameObject.tag = "PowerLaser";
+        PowerLaser.gameObject.SetActive(true);
+        PowerLaserFX.SetActive(true);
+        powerLaserCoolDown = PowerLaserCoolDown();
+        StartCoroutine(powerLaserCoolDown);
     }
 }

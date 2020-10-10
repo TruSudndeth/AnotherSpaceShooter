@@ -30,10 +30,12 @@ public class EnemyMoves : MonoBehaviour
     [SerializeField]
     private Vector3 applyNewPosition;
     private bool _enemyWins = false;
+    private bool _enemyDead = false;
     private bool enemyStoped = false;
     private bool fireAtPlayer = true;
     private Animator EnemyAnim;
     private BoldsFire Fire;
+    private bool stopShooting = false;
     [SerializeField]
     private AudioSource _audioSource;
     [SerializeField]
@@ -125,7 +127,7 @@ public class EnemyMoves : MonoBehaviour
             shipLerps = true;
             if(PlayerShip != null) lastPlayerShip = PlayerShip.transform.position;
 
-            while (NumOfBolts > 0 && StopShootingPlayer())
+            while (NumOfBolts > 0 && StopShootingPlayer() && !_enemyDead)
             {
                 NumOfBolts--;
                 _audioSource.clip = _Shoot;
@@ -177,6 +179,7 @@ public class EnemyMoves : MonoBehaviour
         UnSubscribe();
         _audioSource.clip = _Explode;
         _audioSource.Play();
+        _enemyDead = true;
         Destroy(gameObject, currentClip[0].length);
     }
 
