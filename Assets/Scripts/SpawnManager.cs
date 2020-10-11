@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
     //
     [SerializeField]
     private GameObject Enemy;
+    [SerializeField]
+    private float SpawnDelay = 1;
     private int NumOfEnemy = 10;
     private bool gameOver = false;
     private bool stopCoroutine = false;
@@ -28,6 +30,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
+        yield return new WaitForSecondsRealtime(SpawnDelay);
         while(NumOfEnemy > 0 && !gameOver)
         {
             NumOfEnemy--;

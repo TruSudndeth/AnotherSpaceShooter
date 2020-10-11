@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoves : MonoBehaviour
 {
     //Todo's
+    // player needs to explode on last life with laser hit
     // Player cool down fire's
     // play sound for shields down and hit
     public delegate void PlayerState();
@@ -12,6 +13,8 @@ public class PlayerMoves : MonoBehaviour
     public delegate void NumberOfLives(int LivesLeft);
     public static event NumberOfLives LivesLeft;
     public static event NumberOfLives ShieldCount;
+    public static event PlayerState playerOutOfAmo;
+
 
     [SerializeField]
     private int Lives = 3;
@@ -19,6 +22,10 @@ public class PlayerMoves : MonoBehaviour
     private float speed = 1;
     [SerializeField]
     private GameObject shieldsEnabled;
+    [SerializeField]
+    private GameObject PowerLaser;
+    [SerializeField]
+    private GameObject PowerLaserFX;
     [SerializeField]
     private GameObject LeftDam;
     [SerializeField]
@@ -29,6 +36,8 @@ public class PlayerMoves : MonoBehaviour
     private AudioClip _audioClip;
     [SerializeField]
     private AudioClip _playerdied;
+    [SerializeField]
+    private GameObject PlusPoints;
 
     private int shieldCount = 0;
     private Vector3 bounds;
@@ -36,12 +45,16 @@ public class PlayerMoves : MonoBehaviour
     private float inputY;
     private Vector3 applyInput;
     private float speedMulti = 1;
+    private float shiftSpeed = 1f;
     private bool shields = false;
     private bool invulnerable = false;
     private IEnumerator InvulnerableCoroutine;
+    private IEnumerator powerLaserCoolDown;
     private Animator playerAnim;
+    private int amoCount = 15;
     void Start()
     {
+        GameController.PlusAmoCount += AmoCollected;
         _audioSource = GetComponent<AudioSource>();
         playerAnim = GetComponent<Animator>();
         if (playerAnim == null) Debug.Log("this is emplty");
@@ -63,19 +76,27 @@ public class PlayerMoves : MonoBehaviour
             CheckBounds();
             ApplyInputs();
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && amoCount >= 0)
         {
             GetComponentInChildren<BoldsFire>().Fire();
             _audioSource.clip = _audioClip;
             _audioSource.Play();
+            amoCount--;
+            if(amoCount == 0)
+            {
+                // let game controller know im out of amo and spawn some
+                playerOutOfAmo?.Invoke();
+            }
         }
+        if (Input.GetKey(KeyCode.LeftShift)) shiftSpeed = 1.75f;
+        else shiftSpeed = 1;
     }
 
     private void BasicMovementInput()
     {
 
-        inputX += Input.GetAxis("Horizontal") * speedMulti * speed * Time.deltaTime;
-        inputY += Input.GetAxis("Vertical") * speedMulti * speed * Time.deltaTime;
+        inputX += Input.GetAxis("Horizontal") * speedMulti * speed * Time.deltaTime * shiftSpeed;
+        inputY += Input.GetAxis("Vertical") * speedMulti * speed * Time.deltaTime * shiftSpeed;
     }
     private void CheckBounds()
     {
@@ -109,19 +130,19 @@ public class PlayerMoves : MonoBehaviour
             Lives--;
             PlayerDamaged();
             LivesLeft(Lives);
-            Debug.Log("this ran lives --");
         }
         if(Lives <= 0)
         {
             playerState?.Invoke();
             _audioSource.clip = _playerdied;
             _audioSource.Play();
+            GameController.PlusAmoCount -= AmoCollected;
             Destroy(gameObject);
         }
     }
     public void Shields(bool _shilds)
     {
-        shieldCount++;
+        shieldCount = 3;
         ShieldCount(shieldCount);
         shieldsEnabled.SetActive(true);
         shields = _shilds;
@@ -162,5 +183,35 @@ public class PlayerMoves : MonoBehaviour
                 break;
         }
 
+    }
+    public void AmoCollected(int _NewAmoCount)
+    {
+        amoCount += _NewAmoCount;
+        GameObject _PlusPoints = Instantiate(PlusPoints, transform.position, Quaternion.identity);
+        _PlusPoints.GetComponent<PlusPoints>().Points = _NewAmoCount;
+    }
+    private IEnumerator PowerLaserCoolDown()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        PowerLaser.SetActive(false);
+        PowerLaserFX.SetActive(false);
+        GetComponentInChildren<BoldsFire>().gameObject.tag = "PlayerBolts";
+        StopCoroutine(powerLaserCoolDown);
+    }
+
+    public void FirstAidKit()
+    {
+        Lives++;
+        if (Lives > 3) Lives = 3;
+        LivesLeft(Lives);
+        PlayerDamaged();
+    }
+    public void EnablePowerLaser()
+    {
+        GetComponentInChildren<BoldsFire>().gameObject.tag = "PowerLaser";
+        PowerLaser.gameObject.SetActive(true);
+        PowerLaserFX.SetActive(true);
+        powerLaserCoolDown = PowerLaserCoolDown();
+        StartCoroutine(powerLaserCoolDown);
     }
 }

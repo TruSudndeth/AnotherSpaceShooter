@@ -3,12 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< Updated upstream
   tags:
   - Enemy
   - Bounds
   - Bolts
   - EnemyBolts
   - PlayerBolts
+  - PowerLaser
+  - Obstacle
+=======
+  tags: []
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -18,11 +24,19 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< Updated upstream
   - Enemy
   - Debree
   - Forground
   - background
   - PosProcessing
+=======
+  - 
+  - 
+  - 
+  - 
+  - 
+>>>>>>> Stashed changes
   - 
   - 
   - 
@@ -46,9 +60,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+<<<<<<< Updated upstream
   - name: Background
     uniqueID: 1640274933
     locked: 0
   - name: Foreground
     uniqueID: 3635622807
     locked: 0
+=======
+>>>>>>> Stashed changes

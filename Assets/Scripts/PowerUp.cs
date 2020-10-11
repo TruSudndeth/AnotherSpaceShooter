@@ -10,9 +10,7 @@ public class PowerUp : MonoBehaviour
     public delegate void PowerUps(GameObject HitBy, int PowerUpType);
     public static event PowerUps Collected;
     [SerializeField]
-    private int PowerUpType = 1;
-    [SerializeField]
-    private int PowerUpID; // 1 = tripple shot, 2 = shilds, 3 = speed, 4 = coins
+    private int PowerUpID; // 1 = tripple shot, 2 = shilds, 3 = speed, 4 = coins, 5 = Ammo, 6 = FirstAid, 7 = OP
     private float speed = 1;
     private float gameSpeed = 1;
     void Update()
@@ -22,11 +20,10 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (collision.tag == "Player")
         {
-            Collected(collision.gameObject, PowerUpID);
-            Destroy(gameObject); 
+            Collected?.Invoke(collision.gameObject, PowerUpID);
+            Destroy(gameObject);
         }
     }
 

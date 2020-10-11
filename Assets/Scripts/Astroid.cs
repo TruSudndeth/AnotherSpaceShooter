@@ -43,7 +43,7 @@ public class Astroid : MonoBehaviour
             if (PlayerScript != null) PlayerScript.PlayerHit();
             Explods(ClipLength[0]);
         }
-        if(collision.tag == "PlayerBolts")
+        if(collision.tag == "PlayerBolts" || collision.tag == "PowerLaser")
         {
             Destroy(collision.gameObject);
             Points(PointsWorth);
