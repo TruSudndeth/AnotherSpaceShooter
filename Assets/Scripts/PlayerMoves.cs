@@ -14,6 +14,8 @@ public class PlayerMoves : MonoBehaviour
     public static event NumberOfLives LivesLeft;
     public static event NumberOfLives ShieldCount;
     public static event PlayerState playerOutOfAmo;
+    public delegate void PlayerGotDamaged();
+    public static event PlayerGotDamaged PlayerGotHit;
 
 
     [SerializeField]
@@ -136,8 +138,9 @@ public class PlayerMoves : MonoBehaviour
         else if (!invulnerable && !shields)
         {
             InvulnerableCoroutine = HitCoolDown();
-            StartCoroutine(InvulnerableCoroutine); 
+            StartCoroutine(InvulnerableCoroutine);
             Lives--;
+            PlayerGotHit?.Invoke();
             PlayerDamaged();
             LivesLeft(Lives);
         }
