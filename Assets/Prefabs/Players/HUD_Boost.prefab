@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2752267681598566503}
+  - component: {fileID: 1540001418723304114}
   m_Layer: 0
   m_Name: HUD_Boost
   m_TagString: Untagged
@@ -114,6 +115,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1540001418723304114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567960476452302360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec55b8e924800f42ae8a79b279313bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Hud_Bar: {fileID: 8637517434341320613}
+  BoostPercent: 0
+  CoolDownTime: 4
+  BoostTime: 5
 --- !u!1 &6451339402277928108
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8666709478010492058}
   - component: {fileID: 5128408494687691983}
+  - component: {fileID: 8637517434341320613}
   m_Layer: 0
   m_Name: Full_Bar
   m_TagString: Untagged
@@ -195,6 +213,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8637517434341320613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451339402277928108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0d7541131a2cc4bab41c375afaa07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Full: {fileID: 21300000, guid: 999fb43d8cbc7144c86915cdcfbf8d71, type: 3}
+  Mid: {fileID: 21300000, guid: 9b93171f53334da4ba000c4911ed53f5, type: 3}
+  Low: {fileID: 21300000, guid: 2eab18498844fec4eb5bdbf2e954094c, type: 3}
+  CoolDown: {fileID: 21300000, guid: 08d3ddaae05ca8f488215ccbfb55013d, type: 3}
 --- !u!1 &7688401786033769872
 GameObject:
   m_ObjectHideFlags: 0

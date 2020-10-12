@@ -38,6 +38,8 @@ public class PlayerMoves : MonoBehaviour
     private AudioClip _playerdied;
     [SerializeField]
     private GameObject PlusPoints;
+    [SerializeField]
+    private HUD_Boost HudBoost;
 
     private int shieldCount = 0;
     private Vector3 bounds;
@@ -88,8 +90,16 @@ public class PlayerMoves : MonoBehaviour
                 playerOutOfAmo?.Invoke();
             }
         }
-        if (Input.GetKey(KeyCode.LeftShift)) shiftSpeed = 1.75f;
-        else shiftSpeed = 1;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            shiftSpeed = 1.5f;
+            HudBoost.IsBoosting = true;
+        }
+        else
+        {
+            shiftSpeed = 1;
+            HudBoost.IsBoosting = false;
+        }
     }
 
     private void BasicMovementInput()
@@ -137,6 +147,7 @@ public class PlayerMoves : MonoBehaviour
             _audioSource.clip = _playerdied;
             _audioSource.Play();
             GameController.PlusAmoCount -= AmoCollected;
+            HudBoost.IsBoosting = false;
             Destroy(gameObject);
         }
     }

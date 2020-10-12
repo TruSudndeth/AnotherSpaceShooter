@@ -56,11 +56,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3123519352655544433}
   - component: {fileID: 3123519352655544446}
-  - component: {fileID: 3123519352655544447}
   - component: {fileID: 3123519352655544444}
   - component: {fileID: 1412068953}
   - component: {fileID: 947701538}
   - component: {fileID: 7409219502952403422}
+  - component: {fileID: 3123519352655544447}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -124,9 +124,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -659344489
+  m_SortingLayerID: 1599593937
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 1b4a8fdd39d3a45d0a9ee484ad6800ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -138,30 +138,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3123519352655544447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3123519352655544445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128129b2b10c41a4988f61a4cecb82be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Lives: 3
-  speed: 5
-  shieldsEnabled: {fileID: 3854576703480007333}
-  PowerLaser: {fileID: 4384164099949591540}
-  PowerLaserFX: {fileID: 7704752681524130550}
-  LeftDam: {fileID: 5189070628271429014}
-  RightDam: {fileID: 3503772786851813948}
-  _audioSource: {fileID: 7409219502952403422}
-  _audioClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
-  _playerdied: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-  PlusPoints: {fileID: 6144685881358364433, guid: 763f28b2b4d51b24f9c2888cc2dcb15b,
-    type: 3}
 --- !u!61 &3123519352655544444
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -324,6 +300,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3123519352655544447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3123519352655544445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128129b2b10c41a4988f61a4cecb82be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lives: 3
+  speed: 5
+  shieldsEnabled: {fileID: 3854576703480007333}
+  PowerLaser: {fileID: 4384164099949591540}
+  PowerLaserFX: {fileID: 7704752681524130550}
+  LeftDam: {fileID: 5189070628271429014}
+  RightDam: {fileID: 3503772786851813948}
+  _audioSource: {fileID: 7409219502952403422}
+  _audioClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _playerdied: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  PlusPoints: {fileID: 6144685881358364433, guid: 763f28b2b4d51b24f9c2888cc2dcb15b,
+    type: 3}
+  HudBoost: {fileID: 0}
 --- !u!1001 &1671746990239698777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,7 +481,7 @@ PrefabInstance:
     - target: {fileID: 5009590106406038096, guid: 6e67f33705b26e1438be7197597f86ae,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5009590106406038096, guid: 6e67f33705b26e1438be7197597f86ae,
         type: 3}
@@ -601,7 +602,7 @@ PrefabInstance:
     - target: {fileID: 4120860228186947723, guid: a36d45e045825f2408ff36ecd09d3e43,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4120860228186947723, guid: a36d45e045825f2408ff36ecd09d3e43,
         type: 3}
