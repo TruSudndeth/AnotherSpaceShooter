@@ -14,7 +14,11 @@ public class EnemyMoves : MonoBehaviour
     public static event PointsFrom KillingEnemy;
     [SerializeField]
     private int PointsWorth = 10;
+    [SerializeField]
+    private float TrackDuration = 3f;
     private float t = 0;
+    private float t2 = 0;
+    private float trackInt = 0f;
     [SerializeField]
     private int Lives = 1;
     private float intervals = 7;
@@ -22,6 +26,7 @@ public class EnemyMoves : MonoBehaviour
     private float gameSpeed = 1;
     private float lerpSpeed = 1;
     private bool shipLerps = false;
+    private bool HardTracking = false;
     private GameObject PlayerShip;
     [SerializeField]
     private Vector3 lastPlayerShip;
@@ -121,12 +126,10 @@ public class EnemyMoves : MonoBehaviour
             NumOfBolts = Random.Range(1, 3);
             yield return new WaitForSecondsRealtime(Random.Range(3.5f, 5.5f));
             // lerp speed random .rand in seconds
-            lastPosition = transform.position;
-            lerpSpeed = Random.Range(1f, 5f);
+            //lastPosition = transform.position;
+            lerpSpeed = Random.Range(2f, 5f) * gameSpeed;
             // lerp move twords player
-            shipLerps = true;
-            if(PlayerShip != null) lastPlayerShip = PlayerShip.transform.position;
-
+            RandomEnemyMovement();
             while (NumOfBolts > 0 && StopShootingPlayer() && !_enemyDead)
             {
                 NumOfBolts--;
@@ -153,7 +156,46 @@ public class EnemyMoves : MonoBehaviour
                 lastPosition = transform.position;
             }
         }
+        if(HardTracking)
+        {
+            t2 += (lerpSpeed * Time.deltaTime) / (Mathf.Abs(transform.position.x) + Mathf.Abs(lastPlayerShip.x));
+            if (PlayerShip != null) lastPlayerShip = PlayerShip.transform.position;
+            trackInt = (lerpSpeed * Time.deltaTime);
+            if(lastPlayerShip.x - transform.position.x < -(trackInt))
+            {
+                if(trackInt > 0)trackInt *= -1;
+                lastPosition.x += trackInt;
+            }
+            if (lastPlayerShip.x - transform.position.x > trackInt)
+            {
+                if (trackInt < 0) trackInt *= -1;
+                lastPosition.x += trackInt;
+            }
+            if (t2 > 10)
+            {
+                HardTracking = false;
+                trackInt = 0f;
+                lastPosition = transform.position;
+            }
+        }
         return new Vector3(Mathf.Lerp(lastPosition.x, lastPlayerShip.x, t), intervals, 0);
+    }
+
+    private void RandomEnemyMovement()
+    {
+        int RandomMove = Random.Range(1, 101);
+        if(RandomMove >= 30)  // 7 out of 10 will not hardTrack 
+        {
+            shipLerps = true;
+            HardTracking = false;
+            if (PlayerShip != null) lastPlayerShip = PlayerShip.transform.position;
+        }
+        else 
+        {
+            lerpSpeed = 5f;
+            HardTracking = true;
+            shipLerps = false;
+        }
     }
 
     public void GameControllerSpeed(float _speed)

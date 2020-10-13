@@ -99,7 +99,7 @@ MonoBehaviour:
   Lives: 1
   lastPlayerShip: {x: 0, y: 0, z: 0}
   applyNewPosition: {x: 0, y: 0, z: 0}
-  _audioSource: {fileID: 0}
+  _audioSource: {fileID: 7051603202467391965}
   _Shoot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _Explode: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!61 &9145696631128900421
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -659344489
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     //ToDo's
     // add an event called GameSpeed and update gameSpeed to whom it may concern
+    // destroy Collectables when out of map
     public delegate void UpdateCanvis(int Points, int Coins);
     public static event UpdateCanvis AllScores;
     public delegate void GameOver();
