@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoves : MonoBehaviour
 {
     //Todo's
+    // hoding shift makes Input unidirectional Must Fix to multidirectional
     // player needs to explode on last life with laser hit
     // Player cool down fire's
     // play sound for shields down and hit
@@ -16,6 +17,8 @@ public class PlayerMoves : MonoBehaviour
     public static event PlayerState playerOutOfAmo;
     public delegate void PlayerGotDamaged();
     public static event PlayerGotDamaged PlayerGotHit;
+    public delegate void PlayerStats(int trackingStat);
+    public static event PlayerStats AmmoUpdate;
 
 
     [SerializeField]
@@ -69,6 +72,7 @@ public class PlayerMoves : MonoBehaviour
         LivesLeft?.Invoke(Lives);
         ShieldCount?.Invoke(shieldCount);
         PlayerDamaged();
+        AmmoUpdate?.Invoke(amoCount);
     }
 
     // Update is called once per frame
@@ -82,19 +86,24 @@ public class PlayerMoves : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space) && amoCount >= 0)
         {
-            GetComponentInChildren<BoldsFire>().Fire();
-            _audioSource.clip = _audioClip;
-            _audioSource.Play();
-            amoCount--;
+            if (amoCount > 0)
+            {
+                GetComponentInChildren<BoldsFire>().Fire();
+                _audioSource.clip = _audioClip;
+                _audioSource.Play();
+                amoCount--; 
+            }
             if(amoCount == 0)
             {
                 // let game controller know im out of amo and spawn some
                 playerOutOfAmo?.Invoke();
             }
+            AmmoUpdate?.Invoke(amoCount);
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if(!HudBoost.IsCoolingDown)shiftSpeed = 1.5f;
+            if (!HudBoost.IsCoolingDown) shiftSpeed = 1.5f;
+            else shiftSpeed = 1;
             HudBoost.IsBoosting = true;
         }
         else
@@ -201,6 +210,9 @@ public class PlayerMoves : MonoBehaviour
     public void AmoCollected(int _NewAmoCount)
     {
         amoCount += _NewAmoCount;
+        if(amoCount > 255)amoCount = 255;
+        if (amoCount < 0) amoCount = 0;
+        AmmoUpdate?.Invoke(amoCount);
         GameObject _PlusPoints = Instantiate(PlusPoints, transform.position, Quaternion.identity);
         _PlusPoints.GetComponent<PlusPoints>().Points = _NewAmoCount;
     }
