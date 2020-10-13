@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoves : MonoBehaviour
 {
     //Todo's
+    // Fix Ammo update on start game Line 76
     // hoding shift makes Input unidirectional Must Fix to multidirectional
     // player needs to explode on last life with laser hit
     // Player cool down fire's
@@ -58,7 +59,7 @@ public class PlayerMoves : MonoBehaviour
     private IEnumerator InvulnerableCoroutine;
     private IEnumerator powerLaserCoolDown;
     private Animator playerAnim;
-    private int amoCount = 15;
+    private int amoCount = 80;
     void Start()
     {
         GameController.PlusAmoCount += AmoCollected;

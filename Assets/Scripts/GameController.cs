@@ -139,7 +139,7 @@ public class GameController : MonoBehaviour
         EnemyMoves.KillingEnemy -= UpdateScores;
     }
 
-    private void GameisOver()
+    public void GameisOver()
     {
         PlayerDied?.Invoke();
     }

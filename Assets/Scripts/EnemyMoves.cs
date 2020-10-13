@@ -12,6 +12,7 @@ public class EnemyMoves : MonoBehaviour
     //
     public delegate void PointsFrom(int Worth);
     public static event PointsFrom KillingEnemy;
+    public static event PointsFrom Wave_EnemyCount;
     [SerializeField]
     private int PointsWorth = 10;
     [SerializeField]
@@ -91,6 +92,7 @@ public class EnemyMoves : MonoBehaviour
             {
                 other.GetComponentInParent<PlayerMoves>().PlayerHit();
             }
+            Wave_EnemyCount?.Invoke(1);
             DestroyShip();
         }
     }
@@ -113,8 +115,9 @@ public class EnemyMoves : MonoBehaviour
         {
             if(KilledBy != null)
             {
-                KillingEnemy(PointsWorth);
+                KillingEnemy?.Invoke(PointsWorth);
             }
+            Wave_EnemyCount?.Invoke(1);
             DestroyShip();
         }
     }
