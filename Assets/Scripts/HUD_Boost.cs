@@ -6,6 +6,8 @@ public class HUD_Boost : MonoBehaviour
 {
     private bool _IsBoosting = false;
     public bool IsBoosting { get { return _IsBoosting; } set { _IsBoosting = value; } }
+    private bool _isCoolingDown = false;
+    public bool IsCoolingDown { get { return _isCoolingDown; } }
     [SerializeField]
     private Hud_Bar _Hud_Bar;
     [SerializeField]
@@ -44,6 +46,8 @@ public class HUD_Boost : MonoBehaviour
         }
         BoostPercent = Mathf.Clamp(BoostPercent, 0f, 2f);
         _Hud_Bar.Boost_Perc = BoostPercent;
+
+        _isCoolingDown = _Hud_Bar.IsCoolingDown;
 
     }
 }

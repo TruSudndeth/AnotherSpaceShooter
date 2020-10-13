@@ -94,7 +94,7 @@ public class PlayerMoves : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            shiftSpeed = 1.5f;
+            if(!HudBoost.IsCoolingDown)shiftSpeed = 1.5f;
             HudBoost.IsBoosting = true;
         }
         else
