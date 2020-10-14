@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     private bool MultiShot = false;
     private bool Shilds = false;
     private bool Speed = false;
-    private float BenefitTime = 10;
+    private float PowerUpTime = 0;
     void Start()
     {
         PlayerMoves.playerState += GameisOver;
@@ -49,31 +49,30 @@ public class GameController : MonoBehaviour
     {
         //enable a timmer here for power up time
         //access bolts filed on hitBy
-            StartPowerUpT = StartPowerUpTimer(ApplyHitBy);
+        StartPowerUpT = StartPowerUpTimer(ApplyHitBy);
             switch (PowerUpID)
             {
                 case 1:
                 if (ApplyHitBy.GetComponentInChildren<BoldsFire>() != null) 
                 {
                     ApplyHitBy.GetComponentInChildren<BoldsFire>().MultiShot(3);
-                    BenefitTime = 30;
+                    PowerUpTime = 30;
                     MultiShot = true;
                 }
                     break;
                 case 2:
                 // Player Shilds
-                if (ApplyHitBy.GetComponentInChildren<PlayerMoves>() != null)
+                if (ApplyHitBy.GetComponent<PlayerMoves>() != null)
                 {
-
-                    ApplyHitBy.GetComponentInChildren<PlayerMoves>().Shields(true); 
+                    ApplyHitBy.GetComponent<PlayerMoves>().Shields(true);
                 }
                     Shilds = true;
                     break;
                 case 3:
-                if (ApplyHitBy.GetComponentInChildren<PlayerMoves>() != null)
+                if (ApplyHitBy.GetComponent<PlayerMoves>() != null)
                 {
-                    ApplyHitBy.GetComponentInChildren<PlayerMoves>().GameControllerSpeed(2);
-                    BenefitTime = 60;
+                    ApplyHitBy.GetComponent<PlayerMoves>().GameControllerSpeed(2);
+                    PowerUpTime = 30;
                     Speed = true; 
                 }
                 break;
@@ -82,7 +81,7 @@ public class GameController : MonoBehaviour
                 UpdateScores(0);
                 break;
             case 5:
-                if(ApplyHitBy.GetComponentInChildren<PlayerMoves>() != null)
+                if(ApplyHitBy.GetComponent<PlayerMoves>() != null)
                 {
                     int RangeAmo = Random.Range(15, 30);
                     PlusAmoCount?.Invoke(RangeAmo);
@@ -102,25 +101,29 @@ public class GameController : MonoBehaviour
                 }
                 break;
             }
-        if (!Shilds)
-        {
-            StartCoroutine(StartPowerUpT);
-        }
-        if (Shilds) Shilds = false;
-        //
+        if (!Shilds)    StartCoroutine(StartPowerUpT);
+        if (Shilds)     Shilds = false;
     }
 
     IEnumerator StartPowerUpTimer(GameObject HitBy)
     {
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSeconds(PowerUpTime);
         if (MultiShot)
         {
-            HitBy.GetComponentInChildren<BoldsFire>().MultiShot(1);
+            if (HitBy != null)
+            {
+                HitBy.GetComponentInChildren<BoldsFire>().MultiShot(1);
+                HitBy.GetComponent<PlayerMoves>().NegativeEffects(NPlayerFX.SlowShooter); 
+            }
             MultiShot = false;
         }
         if (Speed)
         {
-            HitBy.GetComponent<PlayerMoves>().GameControllerSpeed(1);
+            if (HitBy != null)
+            {
+                HitBy.GetComponent<PlayerMoves>().GameControllerSpeed(1);
+                HitBy.GetComponent<PlayerMoves>().NegativeEffects(NPlayerFX.SlowMover);
+            }
             Speed = false;
         }
         StopCoroutine(StartPowerUpT);

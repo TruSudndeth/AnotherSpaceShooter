@@ -60,8 +60,15 @@ public class PlayerMoves : MonoBehaviour
     private IEnumerator powerLaserCoolDown;
     private Animator playerAnim;
     private int amoCount = 80;
+    private float SinceLastFire;
+    private float FireRate = 0.25f;
+    private float CurrentFireRate;
+    private IEnumerator SlowShots;
+    private IEnumerator _ResetGameSpeed;
     void Start()
     {
+        CurrentFireRate = FireRate;
+        SinceLastFire = Time.time;
         GameController.PlusAmoCount += AmoCollected;
         _audioSource = GetComponent<AudioSource>();
         playerAnim = GetComponent<Animator>();
@@ -87,8 +94,9 @@ public class PlayerMoves : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space) && amoCount >= 0)
         {
-            if (amoCount > 0)
+            if (amoCount > 0 && Time.time > SinceLastFire + CurrentFireRate)
             {
+                SinceLastFire = Time.time;
                 GetComponentInChildren<BoldsFire>().Fire();
                 _audioSource.clip = _audioClip;
                 _audioSource.Play();
@@ -240,5 +248,45 @@ public class PlayerMoves : MonoBehaviour
         PowerLaserFX.SetActive(true);
         powerLaserCoolDown = PowerLaserCoolDown();
         StartCoroutine(powerLaserCoolDown);
+    }
+    public void NegativeEffects(NPlayerFX FXType)
+    {
+        switch(FXType)
+        {
+            case NPlayerFX.SlowShooter:
+                SlowShots = SlowShooter();
+                StartCoroutine(SlowShots);
+                break;
+            case NPlayerFX.SlowMover:
+                Debug.Log("Move Char Slow");
+                GameControllerSpeed(0.5f);
+                _ResetGameSpeed = ResetGameSpeed();
+                StartCoroutine(_ResetGameSpeed);
+                break;
+            case NPlayerFX.NoBooster:
+                Debug.Log("Boost Disabbled");
+                break;
+            case NPlayerFX.FullDissabler:
+                Debug.Log("Fully Desabled");
+                break;
+            default:
+                Debug.Log("you should not be here");
+                break;
+
+        }
+    }
+
+    private IEnumerator SlowShooter()
+    {
+        CurrentFireRate = FireRate * 4;
+        if (CurrentFireRate > FireRate * 4) CurrentFireRate = FireRate * 4;
+        yield return new WaitForSeconds(5);
+        CurrentFireRate = FireRate;
+    }
+    private IEnumerator ResetGameSpeed()
+    {
+        yield return new WaitForSeconds(5);
+        GameControllerSpeed(1);
+        StopCoroutine(_ResetGameSpeed);
     }
 }
