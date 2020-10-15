@@ -20,6 +20,12 @@ public class Astroid : MonoBehaviour
     private float gameSpeed = 1;
     private Animator Explodes;
 
+    private void Awake()
+    {
+        float SpawnSize = Random.Range(0.5f, 1.0f);
+        transform.localScale = new Vector3(SpawnSize, SpawnSize, 1);
+    }
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
