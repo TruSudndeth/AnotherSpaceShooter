@@ -43,9 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d751fa074eaa8419b9a6e3f5e5a900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyTag: 0
   Bolts: {fileID: 6631564514668331572, guid: da211ae017fd6484ebd37aad651f1178, type: 3}
   Bolts_2: {fileID: 4034527509346223855, guid: 7221a669466f35e468b9ebc84415088d, type: 3}
   Bolts_3: {fileID: 9191216279643909532, guid: 7c076e592f5d4f44f8e9310570065a30, type: 3}
+  Beam: {fileID: 2201454576990747716, guid: e7cff28225ece7144bd3daed517514f3, type: 3}
 --- !u!1 &3123519352655544445
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class Bolt : MonoBehaviour
     private Sprite EnemyBolt;
     [SerializeField]
     private Sprite PowerLaserBolt;
+    private EnemyTag _enemyTag;
+    public EnemyTag enemyTag { get { return _enemyTag; } set { _enemyTag = value; } }
+    private IEnumerator CausticBeam;
     private void Awake()
     {
         transform.tag = transform.parent.tag;
@@ -54,11 +57,11 @@ public class Bolt : MonoBehaviour
         if(transform.tag == "EnemyBolts" && other.tag == "Player")
         {
             other.GetComponentInParent<PlayerMoves>().PlayerHit();
-            DestroyBoltsParent();
+            if (enemyTag != EnemyTag.Caustic) DestroyBoltsParent(); 
         }
         if (transform.tag == "Obstacle")
         {
-            DestroyBoltsParent();
+            if(enemyTag != EnemyTag.Caustic) DestroyBoltsParent();
         }
     }
 

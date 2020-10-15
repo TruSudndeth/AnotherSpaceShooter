@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6753945428731889470, guid: 4cec2e99583495b478999c67e7d5ad7e, type: 3}
+  CausticEnemy: {fileID: 8964623359081421636, guid: 138b74a4ccef74e4c8e01ff1628360a2,
+    type: 3}
   SpawnDelay: 1
 --- !u!1001 &2928018106285689096
 PrefabInstance:

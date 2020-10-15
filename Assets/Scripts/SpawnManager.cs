@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject Enemy;
     [SerializeField]
+    private GameObject CausticEnemy;
+    [SerializeField]
     private float SpawnDelay = 1;
     private float EnemySpawnDelay = 2.5f;
     private float Intervals = 0;
@@ -20,8 +22,10 @@ public class SpawnManager : MonoBehaviour
     private int AtWave = 5;
     private bool gameOver = false;
     private bool stopCoroutine = false;
+    private GameObject[] Enemies;
     void Start()
     {
+        Enemies = new GameObject[] { Enemy, CausticEnemy };
         Intervals = EnemySpawnDelay / AtWave;
         PlayerMoves.playerState += GameOver;
         EnemyMoves.Wave_EnemyCount += EnemyCount;
@@ -55,13 +59,14 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
+            
             EnemiesSpawned = NumOfEnemy;
             yield return new WaitForSecondsRealtime(SpawnDelay);
             while (EnemiesSpawned > 0 && !gameOver)
             {
                 EnemiesSpawned--;
                 yield return new WaitForSeconds(EnemySpawnDelay);
-                Instantiate(Enemy, new Vector3(Random.Range(-10f, 10f), 7, 0), new Quaternion());
+                Instantiate(Enemies[RandomEnemies()], new Vector3(Random.Range(-10f, 10f), 7, 0), new Quaternion());
             }
             stopCoroutine = true;
     }
@@ -75,5 +80,19 @@ public class SpawnManager : MonoBehaviour
     private void EnemyCount(int currentDead)
     {
         EnemiesKilled += currentDead;
+    }
+
+    private int RandomEnemies()
+    {
+        int Temp = Random.Range(0,100);
+        if(Temp > 25)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+
     }
 }

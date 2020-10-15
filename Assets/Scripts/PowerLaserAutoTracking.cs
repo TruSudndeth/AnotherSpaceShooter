@@ -33,8 +33,8 @@ public class PowerLaserAutoTracking : MonoBehaviour
     {
         if (transform.tag == "PowerLaser" && Seeking)
         {
-            RaycastHit2D HitEnemyL = Physics2D.Raycast(transform.position - (transform.right/2), -transform.right, 100f);
-            RaycastHit2D HitEnemyR = Physics2D.Raycast(transform.position + (transform.right/2), transform.right, 100f);
+            RaycastHit2D HitEnemyL = Physics2D.Raycast(transform.position - (transform.right/2), -transform.right, 100f, 1000);
+            RaycastHit2D HitEnemyR = Physics2D.Raycast(transform.position + (transform.right/2), transform.right, 100f, 1000);
             Debug.DrawRay(transform.position - (transform.right/2), -transform.right * 10, Color.red);
             Debug.DrawRay(transform.position - (transform.right / 2), transform.right * 10, Color.red);
             if (HitEnemyL && HitEnemyL.collider.tag == "Enemy")

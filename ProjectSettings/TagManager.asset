@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Bounds
   - PowerLaser
+  - EnemyBeam
   layers:
   - Default
   - TransparentFX

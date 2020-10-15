@@ -43,9 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d751fa074eaa8419b9a6e3f5e5a900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyTag: 0
   Bolts: {fileID: 6631564514668331572, guid: da211ae017fd6484ebd37aad651f1178, type: 3}
   Bolts_2: {fileID: 4034527509346223855, guid: 7221a669466f35e468b9ebc84415088d, type: 3}
   Bolts_3: {fileID: 9191216279643909532, guid: 7c076e592f5d4f44f8e9310570065a30, type: 3}
+  Beam: {fileID: 2201454576990747716, guid: e7cff28225ece7144bd3daed517514f3, type: 3}
+  childOf: {fileID: 0}
 --- !u!1 &6753945428731889470
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +64,7 @@ GameObject:
   - component: {fileID: 4292744677086300773}
   - component: {fileID: 3252501018572003451}
   - component: {fileID: 7051603202467391965}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -96,12 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointsWorth: 10
+  TrackDuration: 3
   Lives: 1
+  shipLerps: 0
+  HardTracking: 0
   lastPlayerShip: {x: 0, y: 0, z: 0}
   applyNewPosition: {x: 0, y: 0, z: 0}
   _audioSource: {fileID: 7051603202467391965}
   _Shoot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _Explode: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  enemyTag: 1
 --- !u!61 &9145696631128900421
 BoxCollider2D:
   m_ObjectHideFlags: 0
