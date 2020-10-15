@@ -375,6 +375,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackGround
       objectReference: {fileID: 0}
+    - target: {fileID: 3992021248160826041, guid: 07765367a7182f24cb7b62717fbd7795,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1919724625
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992021248160826041, guid: 07765367a7182f24cb7b62717fbd7795,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3992021248160826042, guid: 07765367a7182f24cb7b62717fbd7795,
         type: 3}
       propertyPath: m_LocalPosition.x

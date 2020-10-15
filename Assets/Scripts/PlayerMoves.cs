@@ -61,7 +61,7 @@ public class PlayerMoves : MonoBehaviour
     private Animator playerAnim;
     private int amoCount = 80;
     private float SinceLastFire;
-    private float FireRate = 0.25f;
+    private float FireRate = 0.15f;
     private float CurrentFireRate;
     private IEnumerator SlowShots;
     private IEnumerator _ResetGameSpeed;

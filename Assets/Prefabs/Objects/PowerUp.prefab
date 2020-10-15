@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0f6a15012985c448374f8458cd368f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PowerUpType: 3
   PowerUpID: 4
 --- !u!50 &3133140574554755073
 Rigidbody2D:
@@ -105,7 +104,7 @@ PrefabInstance:
     - target: {fileID: 523799726795785422, guid: 83af9d05af6a81946b667e648c8652f0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 523799726795785422, guid: 83af9d05af6a81946b667e648c8652f0,
         type: 3}
