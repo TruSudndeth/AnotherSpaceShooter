@@ -55,6 +55,8 @@ public class EnemyMoves : MonoBehaviour
     private EnemyTag enemyTag;
     private bool resetPosition = false;
     private IEnumerator StartFireing;
+    [SerializeField]
+    private GameObject EShield;
     
     void Awake()
     {
@@ -66,7 +68,7 @@ public class EnemyMoves : MonoBehaviour
         PlayerMoves.playerState += PlayerDied;
         StartFireing = StartShooting();
         StartCoroutine(StartFireing);
-        //transform.position = RandomPosition();
+        ExtraLife();
 
     }
     void Update()
@@ -123,6 +125,10 @@ public class EnemyMoves : MonoBehaviour
     public void EnemyHit(GameObject KilledBy)
     {
         Lives--;
+        if(Lives == 1)
+        {
+            EShield.SetActive(false);
+        }
         if(Lives <= 0)
         {
             if(KilledBy != null)
@@ -266,6 +272,16 @@ public class EnemyMoves : MonoBehaviour
         _audioSource.Play();
         _enemyDead = true;
         Destroy(gameObject, currentClip[0].length);
+    }
+
+    private void ExtraLife()
+    {
+        int _XTraLife = Random.Range(0, 100);
+        if(_XTraLife < 30)
+        {
+            Lives = 2;
+            EShield.SetActive(true);
+        }
     }
 
     private void OnDestroy()

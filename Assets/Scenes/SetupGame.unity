@@ -1080,6 +1080,11 @@ PrefabInstance:
       propertyPath: HudBoost
       value: 
       objectReference: {fileID: 67595682}
+    - target: {fileID: 3854576703480007333, guid: a08e0a8ecb3c3ec4cb59750526accefa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08e0a8ecb3c3ec4cb59750526accefa, type: 3}
 --- !u!1001 &4701258558359724843
