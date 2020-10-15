@@ -1080,11 +1080,6 @@ PrefabInstance:
       propertyPath: HudBoost
       value: 
       objectReference: {fileID: 67595682}
-    - target: {fileID: 3854576703480007333, guid: a08e0a8ecb3c3ec4cb59750526accefa,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08e0a8ecb3c3ec4cb59750526accefa, type: 3}
 --- !u!1001 &4701258558359724843
@@ -1167,6 +1162,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 611658331013479979, guid: 3224af850b0e5f147a55ce8c5cd11768,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7064088481487039983, guid: 3224af850b0e5f147a55ce8c5cd11768,
         type: 3}

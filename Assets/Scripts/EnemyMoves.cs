@@ -11,6 +11,11 @@ public class EnemyMoves : MonoBehaviour
     //ToDo's
     // Enemy interpolates to player from enemy pool after death.
     //
+    public bool aggressive = false;
+    public bool AttackPlayer = false;
+    [SerializeField]
+    private SpriteRenderer Warning;
+    private Color WarningAlpha;
     public delegate void PointsFrom(int Worth);
     public static event PointsFrom KillingEnemy;
     public static event PointsFrom Wave_EnemyCount;
@@ -60,6 +65,7 @@ public class EnemyMoves : MonoBehaviour
     
     void Awake()
     {
+        WarningAlpha = Warning.color;
         _audioSource = GetComponent<AudioSource>();
         Fire = gameObject.GetComponentInChildren<BoldsFire>();
         EnemyAnim = GetComponent<Animator>();
@@ -86,6 +92,34 @@ public class EnemyMoves : MonoBehaviour
             transform.position = new Vector3(12, 7, 0);
             enemyStoped = true;
         }
+        if(aggressive)
+        {
+            RaycastHit2D hit2D;
+            hit2D = Physics2D.CircleCast(transform.position, 3f, Vector3.down, 1, 1 << 9);
+            if(hit2D)
+            {
+                Debug.Log(hit2D.collider.name);
+                WarningAlpha.a += Time.deltaTime;
+                if (WarningAlpha.a > 1) WarningAlpha.a = 1;
+            }
+            else
+            {
+                WarningAlpha.a -= Time.deltaTime;
+                if (WarningAlpha.a < 1) WarningAlpha.a = 0;
+            }
+            if(WarningAlpha.a >= 1)
+            {
+                gameSpeed = 5;
+                AttackPlayer = true;
+            }
+            else
+            {
+                gameSpeed = 1;
+                AttackPlayer = false;
+            }
+            Warning.color = WarningAlpha;
+        }
+
     }
 
     private Vector3 RandomPosition()
@@ -141,19 +175,34 @@ public class EnemyMoves : MonoBehaviour
     }
     IEnumerator StartShooting()
     {
+        float _time = Time.time + Random.Range(2.5f, 5.5f);
+        bool _git = true;
         // random shoot 1 or 2 bolts
         if (enemyTag == EnemyTag.Basic)
         {
             while (true)
             {
                 NumOfBolts = Random.Range(1, 3);
-                yield return new WaitForSecondsRealtime(Random.Range(3.5f, 5.5f));
+                if (!AttackPlayer)
+                {
+                    while(_git)
+                    {
+                        if (Time.time > _time || AttackPlayer)
+                        {
+                            _time = Time.time + (Random.Range(2.5f, 5.5f));
+                            _git = false;
+                        }
+                        else yield return null;
+                    }
+                    _git = true;
+                }
+                else yield return null;
                 // lerp speed random .rand in seconds
                 //lastPosition = transform.position;
                 lerpSpeed = Random.Range(2f, 5f) * gameSpeed;
                 // lerp move twords player
                 RandomEnemyMovement();
-                while (NumOfBolts > 0 && StopShootingPlayer() && !_enemyDead)
+                while (NumOfBolts > 0 && StopShootingPlayer() && !_enemyDead && !AttackPlayer)
                 {
                     NumOfBolts--;
                     _audioSource.clip = _Shoot;
@@ -189,6 +238,7 @@ public class EnemyMoves : MonoBehaviour
             t +=  (lerpSpeed * Time.deltaTime) / (Mathf.Abs(lastPosition.x) + Mathf.Abs(lastPlayerShip.x));
             if(t > 1 || resetPosition)
             {
+                AttackPlayer = false;
                 resetPosition = false;
                 t = 0.0f;
                 shipLerps = false;
@@ -199,7 +249,7 @@ public class EnemyMoves : MonoBehaviour
         {
             t2 += (lerpSpeed * Time.deltaTime) / (Mathf.Abs(transform.position.x) + Mathf.Abs(lastPlayerShip.x));
             if (PlayerShip != null) lastPlayerShip = PlayerShip.transform.position;
-            trackInt = (lerpSpeed * Time.deltaTime);
+            trackInt = (lerpSpeed * Time.deltaTime * (gameSpeed / 4));
             if(lastPlayerShip.x - transform.position.x < -(trackInt))
             {
                 if(trackInt > 0)trackInt *= -1;
@@ -213,6 +263,7 @@ public class EnemyMoves : MonoBehaviour
             if (t2 > 3 || resetPosition)
             {
                 t2 = 0;
+                AttackPlayer = false;
                 resetPosition = false;
                 HardTracking = false;
                 trackInt = 0f;
@@ -225,6 +276,7 @@ public class EnemyMoves : MonoBehaviour
     private void RandomEnemyMovement()
     {
         int RandomMove = Random.Range(1, 101);
+        if (AttackPlayer) RandomMove = 10;
         if(RandomMove >= 30)  // 7 out of 10 will not hardTrack 
         {
             t2 = 0;

@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 4492911077715833939}
   m_Layer: 0
   m_Name: Bolt
-  m_TagString: PlayerBolts
+  m_TagString: EnemyBolts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
