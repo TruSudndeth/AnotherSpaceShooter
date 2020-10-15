@@ -191,6 +191,16 @@ MonoBehaviour:
   Enemy: {fileID: 6753945428731889470, guid: 4cec2e99583495b478999c67e7d5ad7e, type: 3}
   CausticEnemy: {fileID: 8964623359081421636, guid: 138b74a4ccef74e4c8e01ff1628360a2,
     type: 3}
+  Astroid: {fileID: 6574786923089015831, guid: d015e7f60189dea4f94a0dccf6e21d50, type: 3}
+  Health: {fileID: 5986138238266150945, guid: 73df04bc070633c4f9dc505e72bf813c, type: 3}
+  Coins: {fileID: 526982952831844170, guid: 83af9d05af6a81946b667e648c8652f0, type: 3}
+  Ammo: {fileID: 5796945932977971195, guid: 438a8d1eb19382747b5c0dc9e8c729ec, type: 3}
+  OPLaserPickup: {fileID: 5126280545074178055, guid: 7ac5ffd358fe7ce459c2f8590948e823,
+    type: 3}
+  Shields: {fileID: 6016518757035010872, guid: 804e66f5256ee6247b15076caf2a97ec, type: 3}
+  Speed: {fileID: 6595160486981478579, guid: c4fdf2ddc2538e04a90bf112518b66d9, type: 3}
+  TrippleShot: {fileID: 7720060994949724773, guid: 1ee39b691ed48074b835bf329c17283d,
+    type: 3}
   SpawnDelay: 1
 --- !u!1001 &2928018106285689096
 PrefabInstance:

@@ -54,6 +54,7 @@ public class EnemyMoves : MonoBehaviour
     [SerializeField]
     private EnemyTag enemyTag;
     private bool resetPosition = false;
+    private IEnumerator StartFireing;
     
     void Awake()
     {
@@ -63,7 +64,8 @@ public class EnemyMoves : MonoBehaviour
         lastPosition = transform.position;
         PlayerShip = GameObject.Find("Player");
         PlayerMoves.playerState += PlayerDied;
-        StartCoroutine(StartShooting());
+        StartFireing = StartShooting();
+        StartCoroutine(StartFireing);
         //transform.position = RandomPosition();
 
     }
@@ -110,7 +112,7 @@ public class EnemyMoves : MonoBehaviour
     private void PlayerDied()
     {
         _enemyWins = true;
-        StopAllCoroutines();
+        StopCoroutine(StartFireing);
     }
 
     private void UnSubscribe()
@@ -254,7 +256,7 @@ public class EnemyMoves : MonoBehaviour
 
     private void DestroyShip()
     {
-        StopAllCoroutines();
+        StopCoroutine(StartFireing);
         Destroy(Fire.childOf);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         EnemyAnim.SetBool("Destroyed", true);

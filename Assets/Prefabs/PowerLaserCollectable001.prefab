@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4370595406327339509}
   - component: {fileID: 7015617270359184573}
   - component: {fileID: 3836338812250763045}
+  - component: {fileID: 166640466}
   m_Layer: 0
   m_Name: PowerLaserCollectable001
   m_TagString: Untagged
@@ -154,3 +155,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.11
+--- !u!114 &166640466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5126280545074178055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b2d07d5faf2b346998d7382174da17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

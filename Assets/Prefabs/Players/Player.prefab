@@ -48,6 +48,7 @@ MonoBehaviour:
   Bolts_2: {fileID: 4034527509346223855, guid: 7221a669466f35e468b9ebc84415088d, type: 3}
   Bolts_3: {fileID: 9191216279643909532, guid: 7c076e592f5d4f44f8e9310570065a30, type: 3}
   Beam: {fileID: 2201454576990747716, guid: e7cff28225ece7144bd3daed517514f3, type: 3}
+  childOf: {fileID: 0}
 --- !u!1 &3123519352655544445
 GameObject:
   m_ObjectHideFlags: 0

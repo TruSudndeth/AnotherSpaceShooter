@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2085623978}
   - component: {fileID: 853044888331384540}
   - component: {fileID: 1233938732403378022}
+  - component: {fileID: 4532239837808857181}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Obstacle
@@ -254,3 +255,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4532239837808857181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6574786923089015831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b2d07d5faf2b346998d7382174da17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
