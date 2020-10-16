@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 781434907367471455}
   - component: {fileID: 521345140}
   - component: {fileID: 1740294661}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirstAid
-  m_TagString: Untagged
+  m_TagString: PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

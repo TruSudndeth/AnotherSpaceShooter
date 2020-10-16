@@ -17,13 +17,13 @@ GameObject:
   - component: {fileID: 4805432552907979807}
   - component: {fileID: 7896560744588720937}
   - component: {fileID: 791985566}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: coin
-  m_TagString: Untagged
+  m_TagString: PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &523799726795785422
 Transform:
   m_ObjectHideFlags: 0

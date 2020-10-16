@@ -1075,6 +1075,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3123519352655544445, guid: a08e0a8ecb3c3ec4cb59750526accefa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3123519352655544447, guid: a08e0a8ecb3c3ec4cb59750526accefa,
         type: 3}
       propertyPath: HudBoost

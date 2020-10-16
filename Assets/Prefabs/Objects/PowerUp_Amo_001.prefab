@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 5983365876968044586}
   - component: {fileID: 4146482723089621854}
   - component: {fileID: 1317996586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PowerUp_Amo_001
-  m_TagString: Untagged
+  m_TagString: PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

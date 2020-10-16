@@ -63,6 +63,11 @@ public class Bolt : MonoBehaviour
         {
             if(enemyTag != EnemyTag.Caustic) DestroyBoltsParent();
         }
+        if(other.tag == "PickUps" && transform.tag == "EnemyBolts")
+        {
+            Destroy(other.gameObject);
+            DestroyBoltsParent();
+        }
     }
 
     private void DestroyBoltsParent()

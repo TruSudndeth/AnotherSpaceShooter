@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 7015617270359184573}
   - component: {fileID: 3836338812250763045}
   - component: {fileID: 166640466}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PowerLaserCollectable001
-  m_TagString: Untagged
+  m_TagString: PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

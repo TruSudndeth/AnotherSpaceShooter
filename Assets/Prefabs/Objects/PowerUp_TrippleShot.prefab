@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3333008234928113769}
   - component: {fileID: 959951657}
   - component: {fileID: 1011049946}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PowerUp_TrippleShot
-  m_TagString: Untagged
+  m_TagString: PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

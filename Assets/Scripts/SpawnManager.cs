@@ -163,7 +163,6 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             _Coins = Random.Range(0, 100);
-            Debug.Log("Coins left" + TotalCoins + " Random coin Selector " + _Coins);
             if(_Coins < 25)
             {
                 Instantiate(Coins, RandomXLocation(), Quaternion.identity);

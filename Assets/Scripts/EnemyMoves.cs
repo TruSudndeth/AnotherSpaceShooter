@@ -39,6 +39,8 @@ public class EnemyMoves : MonoBehaviour
     [SerializeField]
     private bool HardTracking = false;
     private GameObject PlayerShip;
+    private GameObject PlayerShipPlaceHolder;
+    private bool TargetLocked = false;
     [SerializeField]
     private Vector3 lastPlayerShip;
     private Vector3 lastPosition = Vector3.zero;
@@ -66,6 +68,9 @@ public class EnemyMoves : MonoBehaviour
     private GameObject EShield;
     [HideInInspector]
     public bool ShootsReverse = false;
+    [HideInInspector]
+    public bool DestroyPickUps = false;
+    private bool AttacksPickUps = false;
     
     void Awake()
     {
@@ -80,6 +85,10 @@ public class EnemyMoves : MonoBehaviour
         StartCoroutine(StartFireing);
         ExtraLife();
 
+    }
+    private void Start()
+    {
+        PlayerShipPlaceHolder = PlayerShip;
     }
     void Update()
     {
@@ -99,27 +108,50 @@ public class EnemyMoves : MonoBehaviour
         if(aggressive)
         {
             RaycastHit2D hit2D;
-            hit2D = Physics2D.CircleCast(transform.position, 3f, Vector3.down, 1, 1 << 9);
-            if(hit2D)
+            if (!TargetLocked)
             {
-                Debug.Log(hit2D.collider.name);
-                WarningAlpha.a += Time.deltaTime;
-                if (WarningAlpha.a > 1) WarningAlpha.a = 1;
+                hit2D = Physics2D.CircleCast(transform.position, 3f, Vector3.down, 1, 1 << 9 | 1 << 10);
+                if (hit2D)
+                {
+                    Debug.Log(hit2D.collider.name);
+                    WarningAlpha.a += Time.deltaTime;
+                    if (WarningAlpha.a > 1) WarningAlpha.a = 1;
+                }
+                else
+                {
+                    WarningAlpha.a -= Time.deltaTime;
+                    if (WarningAlpha.a < 1) WarningAlpha.a = 0;
+                }
+
+                if (WarningAlpha.a >= 1)
+                {
+                    TargetLocked = true;
+                    if (hit2D.collider.tag == "Player") gameSpeed = 5;
+                    AttackPlayer = true;
+                    if(DestroyPickUps)AttacksPickUps = true;
+                }
+                else
+                {
+                    gameSpeed = 1;
+                    AttackPlayer = false;
+                }
+                if (DestroyPickUps)
+                {
+                    if (AttacksPickUps)
+                    {
+                        PlayerShip = hit2D.transform.gameObject;
+                    }
+                    else
+                    {
+                        PlayerShip = PlayerShipPlaceHolder;
+                    } 
+                }
             }
-            else
+            if (PlayerShip == null)
             {
-                WarningAlpha.a -= Time.deltaTime;
-                if (WarningAlpha.a < 1) WarningAlpha.a = 0;
-            }
-            if(WarningAlpha.a >= 1)
-            {
-                gameSpeed = 5;
-                AttackPlayer = true;
-            }
-            else
-            {
-                gameSpeed = 1;
+                AttacksPickUps = false;
                 AttackPlayer = false;
+                TargetLocked = false;
             }
             Warning.color = WarningAlpha;
         }
@@ -206,7 +238,7 @@ public class EnemyMoves : MonoBehaviour
                 lerpSpeed = Random.Range(2f, 5f) * gameSpeed;
                 // lerp move twords player
                 RandomEnemyMovement();
-                while (NumOfBolts > 0 && StopShootingPlayer() && !_enemyDead && !AttackPlayer)
+                while (NumOfBolts > 0 && StopShootingPlayer() && !_enemyDead && (!AttackPlayer || AttacksPickUps))
                 {
                     NumOfBolts--;
                     _audioSource.clip = _Shoot;
