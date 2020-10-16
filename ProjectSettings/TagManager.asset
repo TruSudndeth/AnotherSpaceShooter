@@ -12,6 +12,7 @@ TagManager:
   - PowerLaser
   - EnemyBeam
   - EShield
+  - PickUps
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - Enemy
   - Player
-  - 
+  - PowerUps
   - 
   - 
   - 

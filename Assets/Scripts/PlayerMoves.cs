@@ -46,6 +46,8 @@ public class PlayerMoves : MonoBehaviour
     private GameObject PlusPoints;
     [SerializeField]
     private HUD_Boost HudBoost;
+    [SerializeField]
+    private GameObject CollectorsForce;
 
     private int shieldCount = 0;
     private Vector3 bounds;
@@ -65,6 +67,8 @@ public class PlayerMoves : MonoBehaviour
     private float CurrentFireRate;
     private IEnumerator SlowShots;
     private IEnumerator _ResetGameSpeed;
+    private float CollectorsFieldTimer = 0;
+    private IEnumerator _Timmer;
     void Start()
     {
         CurrentFireRate = FireRate;
@@ -119,6 +123,28 @@ public class PlayerMoves : MonoBehaviour
         {
             shiftSpeed = 1;
             HudBoost.IsBoosting = false;
+        }
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+
+            if (CollectorsFieldTimer < Time.time)
+            {
+                _Timmer = Timmer(0.25f, CollectorsForce);
+                StartCoroutine(_Timmer);
+                Debug.Log("Timer was set to zero");
+                CollectorsFieldTimer = Time.time + 15;
+                RaycastHit2D[] Hit2D;
+                Hit2D = Physics2D.CircleCastAll(transform.position, 3.5f, Vector3.up, 0f, 1 << 10);
+                foreach (RaycastHit2D hit2D in Hit2D)
+                {
+                    Debug.Log("Foreach Rand" + hit2D.transform.name);
+                    if (hit2D.transform.gameObject != null)
+                    {
+                        Debug.Log("Hit2D was not null");
+                        hit2D.transform.gameObject.GetComponent<PickUpMove2Player>().PlayerPushedC(transform);
+                    }
+                }
+            }
         }
     }
 
@@ -288,5 +314,14 @@ public class PlayerMoves : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameControllerSpeed(1);
         StopCoroutine(_ResetGameSpeed);
+    }
+
+    private IEnumerator Timmer(float _Seconds, GameObject _gameObject)
+    {
+        _gameObject.SetActive(true);
+        yield return new WaitForSeconds(_Seconds);
+        _gameObject.SetActive(false);
+        StopCoroutine(_Timmer);
+        
     }
 }

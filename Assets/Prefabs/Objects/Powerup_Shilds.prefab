@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 6610440469779926936}
   - component: {fileID: 275280660323856469}
   - component: {fileID: 1436169225}
+  - component: {fileID: 127936869406661906}
+  - component: {fileID: 6195998424108469138}
   m_Layer: 10
   m_Name: Powerup_Shilds
   m_TagString: PickUps
@@ -165,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpID: 2
+  IsMovingDown: 1
 --- !u!114 &1436169225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +180,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2d07d5faf2b346998d7382174da17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &127936869406661906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016518757035010872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b1b89f8cb78a04fab66a99cfb2944b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 0}
+--- !u!114 &6195998424108469138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016518757035010872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b1b89f8cb78a04fab66a99cfb2944b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 0}

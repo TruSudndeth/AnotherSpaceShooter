@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 781434907367471455}
   - component: {fileID: 521345140}
   - component: {fileID: 1740294661}
+  - component: {fileID: 647634337}
   m_Layer: 10
   m_Name: FirstAid
   m_TagString: PickUps
@@ -49,7 +50,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.14}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -96,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpID: 6
+  IsMovingDown: 1
 --- !u!114 &521345140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +123,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2d07d5faf2b346998d7382174da17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &647634337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986138238266150945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b1b89f8cb78a04fab66a99cfb2944b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 0}
 --- !u!1001 &4123868339539760601
 PrefabInstance:
   m_ObjectHideFlags: 0
