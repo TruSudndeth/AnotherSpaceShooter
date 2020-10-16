@@ -20,6 +20,7 @@ public class BoldsFire : MonoBehaviour
     private GameObject Bolts_3;
     [SerializeField]
     private GameObject Beam;
+    [HideInInspector]
     public GameObject childOf;
     private GameObject ThisShoots;
     private bool doubleShot = false;

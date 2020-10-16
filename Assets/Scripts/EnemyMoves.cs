@@ -11,7 +11,9 @@ public class EnemyMoves : MonoBehaviour
     //ToDo's
     // Enemy interpolates to player from enemy pool after death.
     //
+    [HideInInspector]
     public bool aggressive = false;
+    [HideInInspector]
     public bool AttackPlayer = false;
     [SerializeField]
     private SpriteRenderer Warning;
@@ -62,6 +64,8 @@ public class EnemyMoves : MonoBehaviour
     private IEnumerator StartFireing;
     [SerializeField]
     private GameObject EShield;
+    [HideInInspector]
+    public bool ShootsReverse = false;
     
     void Awake()
     {
@@ -306,9 +310,21 @@ public class EnemyMoves : MonoBehaviour
     {
         if (PlayerShip != null)
         {
-            if (PlayerShip.transform.position.y < transform.position.y) fireAtPlayer = true; 
+            if (PlayerShip.transform.position.y < transform.position.y)
+            {
+                fireAtPlayer = true;
+                if (Fire.transform.rotation.z != 180) Fire.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            }
+            else if (PlayerShip.transform.position.y > transform.position.y)
+            {
+                if(!ShootsReverse)fireAtPlayer = false;
+                if (Fire.transform.rotation.z != 0 && ShootsReverse) Fire.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+            }
         }
-        else fireAtPlayer = false;
+        else
+        {
+            fireAtPlayer = false;
+        }
         return fireAtPlayer;
     }
 
