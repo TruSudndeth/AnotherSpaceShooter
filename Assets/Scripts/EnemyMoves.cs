@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +12,9 @@ public class EnemyMoves : MonoBehaviour
     //ToDo's
     // Enemy interpolates to player from enemy pool after death.
     //
+    [SerializeField]
+    private ApplyEnemyMoves _ApplyEnemyMoves;
+    public bool _EnemyMoves = true;
     [HideInInspector]
     public bool aggressive = false;
     [HideInInspector]
@@ -94,7 +98,14 @@ public class EnemyMoves : MonoBehaviour
     {
         if (!enemyStoped) //Update Ship Position
         {
-            transform.position = MoveShip();
+            if (_EnemyMoves)
+            {
+                _ApplyEnemyMoves.MovePosition(MoveShip());
+            }
+            else
+            {
+                lastPosition = transform.position;
+            }
         }
         if (transform.position.y < -7 && !_enemyWins)
         {
@@ -272,7 +283,7 @@ public class EnemyMoves : MonoBehaviour
         if (shipLerps)
         {
             t +=  (lerpSpeed * Time.deltaTime) / (Mathf.Abs(lastPosition.x) + Mathf.Abs(lastPlayerShip.x));
-            if(t > 1 || resetPosition)
+            if(t > 1 || resetPosition || !_EnemyMoves)
             {
                 AttackPlayer = false;
                 resetPosition = false;
@@ -296,7 +307,7 @@ public class EnemyMoves : MonoBehaviour
                 if (trackInt < 0) trackInt *= -1;
                 lastPosition.x += trackInt;
             }
-            if (t2 > 3 || resetPosition)
+            if (t2 > 3 || resetPosition || !_EnemyMoves)
             {
                 t2 = 0;
                 AttackPlayer = false;
