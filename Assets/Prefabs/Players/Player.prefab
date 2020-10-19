@@ -48,6 +48,7 @@ MonoBehaviour:
   Bolts_2: {fileID: 4034527509346223855, guid: 7221a669466f35e468b9ebc84415088d, type: 3}
   Bolts_3: {fileID: 9191216279643909532, guid: 7c076e592f5d4f44f8e9310570065a30, type: 3}
   Beam: {fileID: 2201454576990747716, guid: e7cff28225ece7144bd3daed517514f3, type: 3}
+  Missile: {fileID: 2308991044249777711, guid: ab82d3c73cbb13649943d7d117b34c5f, type: 3}
   childOf: {fileID: 0}
 --- !u!1 &3123519352655544445
 GameObject:
@@ -329,6 +330,7 @@ MonoBehaviour:
   PlusPoints: {fileID: 6144685881358364433, guid: 763f28b2b4d51b24f9c2888cc2dcb15b,
     type: 3}
   HudBoost: {fileID: 0}
+  CollectorsForce: {fileID: 4282578602207299803}
 --- !u!1 &4282578602207299803
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8276033208998227182
 Transform:
   m_ObjectHideFlags: 0

@@ -206,7 +206,12 @@ public class EnemyMoves : MonoBehaviour
     public void EnemyHit(GameObject KilledBy)
     {
         Lives--;
-        if(Lives == 1)
+        if(KilledBy.transform.tag == "Missile")
+        {
+            Lives = 0;
+            PointsWorth *= 5;
+        }
+        if(Lives <= 1)
         {
             EShield.SetActive(false);
         }
@@ -356,12 +361,12 @@ public class EnemyMoves : MonoBehaviour
             if (PlayerShip.transform.position.y < transform.position.y)
             {
                 fireAtPlayer = true;
-                if (Fire.transform.rotation.z != 180) Fire.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+                if (Fire.transform.rotation.z != 180) Fire.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 180));
             }
             else if (PlayerShip.transform.position.y > transform.position.y)
             {
                 if(!ShootsReverse)fireAtPlayer = false;
-                if (Fire.transform.rotation.z != 0 && ShootsReverse) Fire.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+                if (Fire.transform.rotation.z != 0 && ShootsReverse) Fire.transform.rotation = Quaternion.Euler(new Vector3(90,0,0));
             }
         }
         else

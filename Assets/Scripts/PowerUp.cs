@@ -10,6 +10,7 @@ public class PowerUp : MonoBehaviour
     public static event PowerUps Collected;
     [SerializeField]
     private int PowerUpID; // 1 = tripple shot, 2 = shilds, 3 = speed, 4 = coins, 5 = Ammo, 6 = FirstAid, 7 = OP
+    [SerializeField]
     private float speed = 1;
     private float gameSpeed = 1;
     [HideInInspector]
@@ -31,7 +32,8 @@ public class PowerUp : MonoBehaviour
         }
     }
 
-    public void GameControllerSpeed(float _speed)
+    public
+        void GameControllerSpeed(float _speed)
     {
         gameSpeed = _speed;
     }

@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms;
 public class BoldsFire : MonoBehaviour
 {
     //ToDo's
+    // Enemy Ship resets the Bolt Fire Location rotation in the x by 90 degrees
     // make an enumerator for number of shots 1,2,3 shots also missles or plasma bolts
     // Unity Caution missing gameObject reference when destroyed in Bolts.Script
     public EnemyTag enemyTag;
@@ -20,6 +21,8 @@ public class BoldsFire : MonoBehaviour
     private GameObject Bolts_3;
     [SerializeField]
     private GameObject Beam;
+    [SerializeField]
+    private GameObject Missile;
     [HideInInspector]
     public GameObject childOf;
     private GameObject ThisShoots;
@@ -64,6 +67,9 @@ public class BoldsFire : MonoBehaviour
                 break;
             case 4:
                 ThisShoots = Beam;
+                break;
+            case 5:
+                ThisShoots = Missile;
                 break;
             default:
                 ThisShoots = Bolts;

@@ -13,6 +13,7 @@ TagManager:
   - EnemyBeam
   - EShield
   - PickUps
+  - Missile
   layers:
   - Default
   - TransparentFX

@@ -29,6 +29,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject TrippleShot;
     [SerializeField]
+    private GameObject Missiles_PowerUp;
+    [SerializeField]
     private float SpawnDelay = 1;
     private float EnemySpawnDelay = 2.5f;
     private float Intervals = 0;
@@ -194,6 +196,7 @@ public class SpawnManager : MonoBehaviour
         int _Speed = 0;
         int _OpLaser = 0;
         int _TrippleShot = 0;
+        int _Missiles = 0;
         bool DidSpawnedSomething = true;
         while (true)
         {
@@ -206,6 +209,7 @@ public class SpawnManager : MonoBehaviour
             _Speed          = Random.Range(0, 101);
             _OpLaser        = Random.Range(0, 101);
             _TrippleShot    = Random.Range(0, 101);
+            _Missiles       = Random.Range(0, 101);
             if (_Shields < 15)
             {
                 Instantiate(Shields, RandomXLocation(), Quaternion.identity);
@@ -225,6 +229,11 @@ public class SpawnManager : MonoBehaviour
             else if (_TrippleShot < 25)
             {
                 Instantiate(TrippleShot, RandomXLocation(), Quaternion.identity);
+                DidSpawnedSomething = true;
+            }
+            else if (_Missiles < 30)
+            {
+                Instantiate(Missiles_PowerUp, RandomXLocation(), Quaternion.identity);
                 DidSpawnedSomething = true;
             }
 

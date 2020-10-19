@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385607964337742145}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2306807690655835395}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
 --- !u!114 &859649294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   Bolts_2: {fileID: 4034527509346223855, guid: 7221a669466f35e468b9ebc84415088d, type: 3}
   Bolts_3: {fileID: 9191216279643909532, guid: 7c076e592f5d4f44f8e9310570065a30, type: 3}
   Beam: {fileID: 2201454576990747716, guid: e7cff28225ece7144bd3daed517514f3, type: 3}
+  Missile: {fileID: 2308991044249777711, guid: ab82d3c73cbb13649943d7d117b34c5f, type: 3}
   childOf: {fileID: 0}
 --- !u!1 &6753945428731889470
 GameObject:

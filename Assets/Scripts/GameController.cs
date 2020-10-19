@@ -100,6 +100,13 @@ public class GameController : MonoBehaviour
                     ApplyHitBy.GetComponent<PlayerMoves>().EnablePowerLaser();
                 }
                 break;
+            case 8:
+                if(ApplyHitBy.GetComponent<PlayerMoves>() != null)
+                {
+                    ApplyHitBy.GetComponentInChildren<BoldsFire>().MultiShot(5);
+                    ApplyHitBy.GetComponent<PlayerMoves>().ShootMissile();
+                }
+                break;
             }
         if (!Shilds)    StartCoroutine(StartPowerUpT);
         if (Shilds)     Shilds = false;

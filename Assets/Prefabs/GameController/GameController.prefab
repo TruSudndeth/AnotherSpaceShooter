@@ -201,6 +201,8 @@ MonoBehaviour:
   Speed: {fileID: 6595160486981478579, guid: c4fdf2ddc2538e04a90bf112518b66d9, type: 3}
   TrippleShot: {fileID: 7720060994949724773, guid: 1ee39b691ed48074b835bf329c17283d,
     type: 3}
+  Missiles_PowerUp: {fileID: 6593631947888222268, guid: 3a8ec6ed10a3714498520b254648be9e,
+    type: 3}
   SpawnDelay: 1
 --- !u!1001 &2928018106285689096
 PrefabInstance:

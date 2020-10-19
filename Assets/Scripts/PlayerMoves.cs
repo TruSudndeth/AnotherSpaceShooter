@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerMoves : MonoBehaviour
@@ -62,6 +63,7 @@ public class PlayerMoves : MonoBehaviour
     private IEnumerator powerLaserCoolDown;
     private Animator playerAnim;
     private int amoCount = 80;
+    private int TempAmoCount;
     private float SinceLastFire;
     private float FireRate = 0.15f;
     private float CurrentFireRate;
@@ -69,8 +71,12 @@ public class PlayerMoves : MonoBehaviour
     private IEnumerator _ResetGameSpeed;
     private float CollectorsFieldTimer = 0;
     private IEnumerator _Timmer;
+    private bool ShootMissiles = false;
+    private int Missiles = 0;
+    private BoldsFire Fire; 
     void Start()
     {
+        Fire = GetComponentInChildren<BoldsFire>();
         CurrentFireRate = FireRate;
         SinceLastFire = Time.time;
         GameController.PlusAmoCount += AmoCollected;
@@ -85,6 +91,7 @@ public class PlayerMoves : MonoBehaviour
         ShieldCount?.Invoke(shieldCount);
         PlayerDamaged();
         AmmoUpdate?.Invoke(amoCount);
+
     }
 
     // Update is called once per frame
@@ -98,20 +105,32 @@ public class PlayerMoves : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space) && amoCount >= 0)
         {
-            if (amoCount > 0 && Time.time > SinceLastFire + CurrentFireRate)
+            if (amoCount > 0 && Time.time > SinceLastFire + CurrentFireRate && !ShootMissiles)
             {
                 SinceLastFire = Time.time;
-                GetComponentInChildren<BoldsFire>().Fire();
+                Fire.Fire();
                 _audioSource.clip = _audioClip;
                 _audioSource.Play();
                 amoCount--; 
+            }
+            if(Missiles >= 0 && ShootMissiles && Time.time > SinceLastFire + CurrentFireRate)
+            {
+                SinceLastFire = Time.time;
+                Fire.Fire();
+                Missiles--;
+                AmmoUpdate?.Invoke(Missiles);
+                if(Missiles == 0)
+                {
+                    ShootMissiles = false;
+                    Fire.MultiShot(1);
+                }
             }
             if(amoCount == 0)
             {
                 // let game controller know im out of amo and spawn some
                 playerOutOfAmo?.Invoke();
             }
-            AmmoUpdate?.Invoke(amoCount);
+            if(!ShootMissiles)AmmoUpdate?.Invoke(amoCount);
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -256,7 +275,7 @@ public class PlayerMoves : MonoBehaviour
         yield return new WaitForSecondsRealtime(5);
         PowerLaser.SetActive(false);
         PowerLaserFX.SetActive(false);
-        GetComponentInChildren<BoldsFire>().gameObject.tag = "PlayerBolts";
+        Fire.gameObject.tag = "PlayerBolts";
         StopCoroutine(powerLaserCoolDown);
     }
 
@@ -269,7 +288,7 @@ public class PlayerMoves : MonoBehaviour
     }
     public void EnablePowerLaser()
     {
-        GetComponentInChildren<BoldsFire>().gameObject.tag = "PowerLaser";
+        Fire.gameObject.tag = "PowerLaser";
         PowerLaser.gameObject.SetActive(true);
         PowerLaserFX.SetActive(true);
         powerLaserCoolDown = PowerLaserCoolDown();
@@ -323,5 +342,12 @@ public class PlayerMoves : MonoBehaviour
         _gameObject.SetActive(false);
         StopCoroutine(_Timmer);
         
+    }
+
+    public void ShootMissile()
+    {
+        ShootMissiles = true;
+        Missiles += 5;
+        AmmoUpdate?.Invoke(Missiles);
     }
 }

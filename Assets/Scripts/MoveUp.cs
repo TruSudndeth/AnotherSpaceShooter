@@ -8,6 +8,6 @@ public class MoveUp : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.TransformDirection(Vector3.up * speed * Time.deltaTime);
+        transform.position += transform.TransformDirection(Vector3.forward * speed * Time.deltaTime);
     }
 }
