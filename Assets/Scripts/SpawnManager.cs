@@ -9,6 +9,8 @@ public class SpawnManager : MonoBehaviour
     //ToDo's
     //
     [SerializeField]
+    private GameObject EnemyBoss;
+    [SerializeField]
     private GameObject Enemy;
     [SerializeField]
     private GameObject CausticEnemy;
@@ -44,6 +46,8 @@ public class SpawnManager : MonoBehaviour
     private int TotalCoins = 100;
     private IEnumerator CoinsCoins;
     private IEnumerator _SpawnEnemies;
+    private IEnumerator _TAstroids;
+    private bool BossTime = false;
     void Start()
     {
         Enemies = new GameObject[] { Enemy, CausticEnemy };
@@ -56,7 +60,8 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(CoinsCoins);
         StartCoroutine(PowerUps());
         StartCoroutine(ItemSpawns());
-        StartCoroutine(TerrainAstroids());
+        _TAstroids = TerrainAstroids();
+        StartCoroutine(_TAstroids);
         NextWaveItems();
     }
 
@@ -64,11 +69,10 @@ public class SpawnManager : MonoBehaviour
     {
         if(stopCoroutine)
         {
-            Debug.Log("StopCoroutine is true");
             StopAllCoroutines();
             stopCoroutine = false;
         }
-        if (EnemiesKilled >= NumOfEnemy)
+        if (AtWave > 1 && EnemiesKilled >= NumOfEnemy)
         {
             EnemiesKilled = 0;
             AtWave--;
@@ -77,7 +81,13 @@ public class SpawnManager : MonoBehaviour
             if(EnemySpawnDelay > Intervals)EnemySpawnDelay -= Intervals;
             if (EnemySpawnDelay <= Intervals)EnemySpawnDelay = Intervals;
             StartCoroutine(SpawnEnemies());
-        } 
+        }
+        if(AtWave == 1 && !BossTime)
+        {
+            Instantiate(EnemyBoss, new Vector3(0, 12, 0), Quaternion.identity);
+            StopCoroutine(_TAstroids);
+            BossTime = true;
+        }
         if(AtWave <= 0)
         {
             gameOver = true;
@@ -97,7 +107,7 @@ public class SpawnManager : MonoBehaviour
             
             EnemiesSpawned = NumOfEnemy;
             yield return new WaitForSecondsRealtime(SpawnDelay);
-            while (EnemiesSpawned > 0 && !gameOver)
+            while (EnemiesSpawned > 0 && !gameOver && AtWave > 1)
             {
                 EnemiesSpawned--;
                 yield return new WaitForSeconds(EnemySpawnDelay);
@@ -129,7 +139,7 @@ public class SpawnManager : MonoBehaviour
             if (_health < 10) Instantiate(Health, RandomXLocation(), Quaternion.identity);
             yield return new WaitForSeconds(5);
             _Amm0 = Random.Range(0, 100);
-            if (_Amm0 < 35) Instantiate(Ammo, RandomXLocation(), Quaternion.identity);
+            if (_Amm0 < 45) Instantiate(Ammo, RandomXLocation(), Quaternion.identity);
 
         }
     }
@@ -165,7 +175,7 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             _Coins = Random.Range(0, 100);
-            if(_Coins < 25)
+            if(_Coins < 35)
             {
                 Instantiate(Coins, RandomXLocation(), Quaternion.identity);
                 TotalCoins--;

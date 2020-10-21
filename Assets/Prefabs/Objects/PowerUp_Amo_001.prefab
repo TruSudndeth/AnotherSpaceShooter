@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpID: 5
+  speed: 1
   IsMovingDown: 1
 --- !u!61 &5983365876968044586
 BoxCollider2D:
@@ -191,4 +192,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b1b89f8cb78a04fab66a99cfb2944b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 0}

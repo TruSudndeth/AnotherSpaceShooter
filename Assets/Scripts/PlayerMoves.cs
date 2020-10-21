@@ -303,7 +303,6 @@ public class PlayerMoves : MonoBehaviour
                 StartCoroutine(SlowShots);
                 break;
             case NPlayerFX.SlowMover:
-                Debug.Log("Move Char Slow");
                 GameControllerSpeed(0.5f);
                 _ResetGameSpeed = ResetGameSpeed();
                 StartCoroutine(_ResetGameSpeed);

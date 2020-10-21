@@ -46,7 +46,10 @@ public class MissileBehaviour : MonoBehaviour
         if(collision.tag == "Enemy")
         {
             EnemyMoves CollisionGetScript = collision.transform.gameObject.GetComponent<EnemyMoves>();
-            CollisionGetScript.EnemyHit(gameObject);
+            if (CollisionGetScript != null)
+            {
+                CollisionGetScript.EnemyHit(gameObject); 
+            }
             Destroy(gameObject);
         }
     }

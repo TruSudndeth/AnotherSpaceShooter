@@ -51,7 +51,7 @@ public class Bolt : MonoBehaviour
     {
         if((transform.tag == "PlayerBolts" || transform.tag == "PowerLaser") && other.tag == "Enemy")
         {
-            other.GetComponentInParent<EnemyMoves>().EnemyHit(gameObject);
+            if(other.GetComponent<EnemyMoves>() != null)other.GetComponentInParent<EnemyMoves>().EnemyHit(gameObject);
             DestroyBoltsParent();
         }
         if(transform.tag == "EnemyBolts" && other.tag == "Player")

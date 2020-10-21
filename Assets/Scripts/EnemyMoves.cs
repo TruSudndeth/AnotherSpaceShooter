@@ -124,7 +124,6 @@ public class EnemyMoves : MonoBehaviour
                 hit2D = Physics2D.CircleCast(transform.position, 3f, Vector3.down, 1, 1 << 9 | 1 << 10);
                 if (hit2D)
                 {
-                    Debug.Log(hit2D.collider.name);
                     WarningAlpha.a += Time.deltaTime;
                     if (WarningAlpha.a > 1) WarningAlpha.a = 1;
                 }

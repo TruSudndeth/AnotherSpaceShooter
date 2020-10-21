@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     private float PowerUpTime = 0;
     void Start()
     {
+        BossDamage._GameIsOver += GameisOver;
         PlayerMoves.playerState += GameisOver;
         PowerUp.Collected += EnablePowerUp;
         EnemyMoves.KillingEnemy += UpdateScores;
@@ -147,6 +148,7 @@ public class GameController : MonoBehaviour
     {
         PowerUp.Collected -= EnablePowerUp;
         EnemyMoves.KillingEnemy -= UpdateScores;
+        BossDamage._GameIsOver -= GameisOver;
     }
 
     public void GameisOver()

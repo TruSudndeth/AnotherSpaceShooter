@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpID: 2
+  speed: 1
   IsMovingDown: 1
 --- !u!114 &1436169225
 MonoBehaviour:
@@ -192,7 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b1b89f8cb78a04fab66a99cfb2944b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 0}
 --- !u!114 &6195998424108469138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,4 +205,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b1b89f8cb78a04fab66a99cfb2944b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 0}
